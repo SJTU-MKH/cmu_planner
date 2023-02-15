@@ -23,33 +23,37 @@
   </link>
 
   <gazebo reference="camera">
-    <sensor type="camera" name="camera">
-      <update_rate>15.0</update_rate>
+    <sensor type="depth" name="camera">
+      <update_rate>20.0</update_rate>
       <camera name="head">
         <horizontal_fov>2.0</horizontal_fov>
         <image>
-          <width>320</width>
-          <height>180</height>
+          <width>640</width>
+          <height>360</height>
           <format>R8G8B8</format>
         </image>
         <clip>
           <near>0.1</near>
-          <far>200.0</far>
+          <far>10.0</far>
         </clip>
       </camera>
-      <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+      <plugin name="rgbd_camera_controller" filename="libgazebo_ros_openni_kinect.so">
         <alwaysOn>true</alwaysOn>
-        <updateRate>0.0</updateRate>
-        <cameraName>camera</cameraName>
-        <imageTopicName>image</imageTopicName>
-        <cameraInfoTopicName>camera_info</cameraInfoTopicName>
-        <frameName>camera</frameName>
-        <hackBaseline>0.0</hackBaseline>
-        <distortionK1>0.0</distortionK1>
-        <distortionK2>0.0</distortionK2>
-        <distortionK3>0.0</distortionK3>
-        <distortionT1>0.0</distortionT1>
-        <distortionT2>0.0</distortionT2>
+          <baseline>0.2</baseline>
+          <cameraName>rgbd_camera</cameraName>
+          <imageTopicName>/rgbd_camera/color/image</imageTopicName>
+          <cameraInfoTopicName>/rgbd_camera/color/camera_info</cameraInfoTopicName>
+          <depthImageTopicName>/rgbd_camera/depth/image</depthImageTopicName>
+          <depthImageCameraInfoTopicName>/rgbd_camera/depth/camera_info</depthImageCameraInfoTopicName>
+          <pointCloudTopicName>/rgbd_camera/depth/points</pointCloudTopicName>
+          <frameName>rgbd_camera</frameName>
+          <pointCloudCutoff>0.1</pointCloudCutoff>
+          <pointCloudCutoffMax>10.0</pointCloudCutoffMax>
+          <distortionK1>0</distortionK1>
+          <distortionK2>0</distortionK2>
+          <distortionK3>0</distortionK3>
+          <distortionT1>0</distortionT1>
+          <distortionT2>0</distortionT2>
       </plugin>
     </sensor>
   </gazebo>

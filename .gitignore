@@ -4,7 +4,13 @@ devel
 
 install
 
+.vscode
+
+logs
+
 .catkin_workspace
+
+.catkin_tools
 
 *~
 
