@@ -4,14 +4,17 @@
   <arg name="vehicleX" default="0"/>
   <arg name="vehicleY" default="0"/>
   <arg name="checkTerrainConn" default="false"/>
+  <arg name="useLocalPlanner" default="true"/>
 
   <include file="$(find ps3joy)/launch/ps3.launch" />
 
-  <include file="$(find local_planner)/launch/local_planner.launch" >
-    <arg name="cameraOffsetZ" value="$(arg cameraOffsetZ)"/>
-    <arg name="goalX" value="$(arg vehicleX)"/>
-    <arg name="goalY" value="$(arg vehicleY)"/>
-  </include>
+  <group if="$(arg useLocalPlanner)">
+    <include file="$(find local_planner)/launch/local_planner.launch" >
+      <arg name="cameraOffsetZ" value="$(arg cameraOffsetZ)"/>
+      <arg name="goalX" value="$(arg vehicleX)"/>
+      <arg name="goalY" value="$(arg vehicleY)"/>
+    </include>
+  </group>
 
   <include file="$(find terrain_analysis)/launch/terrain_analysis.launch" />
 
