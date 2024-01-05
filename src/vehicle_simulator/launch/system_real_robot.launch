@@ -26,6 +26,16 @@
 
   <include file="$(find loam_interface)/launch/loam_interface.launch" />
 
+  <!-- <include file="$(find livox_ros_driver2)/launch_ROS1/msg_MID360.launch" /> -->
+
+  <include file="$(find fast_lio)/launch/mapping_mid360.launch" >
+    <arg name="rviz" value="false"/>
+  </include>
+
+  <!-- <include file="$(find realsense2_camera)/launch/rs_camera.launch" /> -->
+
+  <node pkg="tf" type="static_transform_publisher" name="vehicleTransPublisher" args="0 0 0 0 0 0 /sensor /vehicle 1000"/>
+
   <node launch-prefix="nice" pkg="rviz" type="rviz" name="rvizGA" args="-d $(find vehicle_simulator)/rviz/vehicle_simulator.rviz" respawn="true"/>
 
 </launch>
